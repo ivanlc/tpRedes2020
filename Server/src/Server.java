@@ -15,30 +15,19 @@ public class Server {
 		Socket sc = null;
 		DataInputStream in;
 		DataOutputStream out;
+		int clientCont = 1;
 
 		final int PUERTO = 3000;
-
+		
 		try {
 			servidor = new ServerSocket(PUERTO);
-			System.out.println("Servidor iniciado");
-
-			while (true) {
+			while (true) {			
+				System.out.println("Servidor iniciado");
 				sc = servidor.accept();
-				Scanner scanner = new Scanner(sc.getInputStream());
-				
-				
-				String line = "line";
-				
-				while(scanner.hasNextLine() && !"".equals(line) && !"".equals(line = scanner.nextLine())) {
-					System.out.println(line);
-					if (line.equals("exit")) {
-						break;
-					};					
-				}
-				
-				sc.close();
-				System.out.println("Cliente desconectado");
-
+				ClientThread ct = new ClientThread(sc,clientCont);
+				clientCont++;
+				Thread thread = new Thread(ct);
+				thread.start();
 			}
 
 		} catch (IOException ex) {
