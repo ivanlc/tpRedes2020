@@ -5,6 +5,7 @@ _Comunicación cliente-servidor mediante socket TCP_
 _Ejecutar los siguientes comandos dentro de la carpeta jar_
 
 java -jar client.jar
+
 java -jar server.jar
 
 ## Realizado por:
